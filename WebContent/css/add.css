@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+body{
+	background-color:#CCFFCC;
+
+}
+
+h1{
+	text-align:left;
+	text-decoration: none;
+}
+h2{
+	text-align:center;
+	margin-left:100px;
+}
+.yu{
+	margin-right:20px;
+	margin-top:0;
+}
+#yuza{
+	font-size:smaller;
+	height: 20px;
+	float:right;
+}
+#input{
+	text-align:center;
+	margin-right:100px;
+	margin-top:10px;
+	margin-buttom:10px;
+}
+#input_text{
+	margin:10px 20px;
+}
+#input_border{
+	border:1px solid #00FF00;
+}
+
+#busyo{
+	text-align:center;
+	margin:100px;
+}
+#butn1{
+	margin-left:500px;
+	margin-bottom:20px;
+}
+#butn2{
+	margin-left:500px;
+	margin-bottom:200px;
+}
+.square_btn {
+	clear: both;
+	width: 300px;
+	height: 30px;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #00bcd4;
+    transition: .4s;
+
+  }
+
+.square_btn:hover {
+    background: #1ec7bb;
+}
+
+.square_btn2 {
+	clear: both;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #00bcd4;
+    transition: .4s;
+
+  }
+
+.square_btn2:hover {
+    background: #1ec7bb;
+}
+.wf-nikukyu { font-family: "Nikukyu"; }
+
+.err {
+	color:red;
+	margin: 0;
+}
