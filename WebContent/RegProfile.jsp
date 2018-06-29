@@ -141,7 +141,8 @@ Integer admin_level = Integer.parseInt(oz);
 		</div>
 
 		<div>
-			<input type="submit" value="登 録" class="square_btn2"/>
+			<input type="submit" value="登 録" class="square_btn2"
+				onclick="return confirm('登録を行いますが、よろしいですか？')"/>
 		</div>
 
 	</form>

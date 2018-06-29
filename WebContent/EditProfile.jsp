@@ -41,9 +41,12 @@ if(rs.next()){
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/add.css" />
+	<script type="text/javascript" src="js/alert.js"></script>
 	<title>社員変更</title>
 </head>
 <body>
+
+
 
 	<form method="post" action="Logout">
 		<h1><a href="Menu.jsp">社員情報管理システム</a></h1>
@@ -54,7 +57,7 @@ if(rs.next()){
 		<h2>社員変更</h2>
 	</form>
 
-	<form method="post" action="Edit" id="input">
+	<form method="post" action="Edit" id="input" name="edit">
 		<div class="err"><%= err %></div>
 		<div class="err"><%= NulName %></div>
 		<div class="err"><%= NulDep %></div>
@@ -143,6 +146,7 @@ if(rs.next()){
 	<div id="input">
 		<a href="List"><button class="square_btn2">キャンセル</button></a>
 	</div>
+
 </body>
 </html>
 <%

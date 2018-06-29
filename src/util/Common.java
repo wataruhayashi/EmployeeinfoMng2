@@ -19,11 +19,13 @@ public class Common {
 	public static final String IdPassErr = "社員番号かパスワードに誤りがあります。";
 	public static final String DepErr = "入力された所属はすでに登録されています。";
 	public static final String IdErr = "入力された社員番号は既に登録されています。";
-	public static final String BackErr = "セッションが無効です。社員番号とパスワードを入力してください。";
+	public static final String BackErr = "セッションが切れました。社員番号とパスワードを入力してください。";
 	public static final String MisErr = "入社日は2015-01-01のような形式で入力してください。";
 	public static final String IdMiss = "社員番号は半角数字で入力してください。";
 	public static final String NameMiss = "社員名項目で記号は入力しないでください。";
-
+	public static final String AddMsg = "登録が完了しました。";
+	public static final String EditMsg = "変更が完了しました。";
+	public static final String DelMsg = "削除が完了しました。";
 	//カレンダー正規表現
 	public static boolean DateMatch(String cal) {
 		Pattern pattern = Pattern.compile("^[0-9]{4}-[0-9]{2}-[0-9]{2}$");

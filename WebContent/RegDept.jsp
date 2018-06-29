@@ -51,7 +51,8 @@ if(err == null){err = "";}
 		</div>
 
 		<div>
-			<input type="submit" value="登録" class="square_btn" id="butn1">
+			<input type="submit" value="登録" class="square_btn" id="butn1"
+				onclick="return confirm('登録を行いますが、よろしいですか？')" />
 		</div>
 
 	</form>

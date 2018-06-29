@@ -63,6 +63,7 @@ public class List extends HttpServlet {
 			rs.close();
 			ps.close();
 			db.close();
+
 		}catch(NamingException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {

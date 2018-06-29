@@ -45,6 +45,7 @@ public class Edit extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		String update_user = (String) session.getAttribute("id");
 
+
 		try {
 
 			//データベース接続
@@ -63,6 +64,8 @@ public class Edit extends HttpServlet {
 			//削除ボタンを押したとき
 			} else if (request.getParameter("delete") != null) {
 			  ps = db.prepareStatement("DELETE FROM tb_employee_info WHERE employee_id='" + employee_id + "'");
+			//削除メッセージ
+			  session.setAttribute("Del", Common.DelMsg);
 
 			//更新ボタンを押したとき
 			} else {
@@ -102,21 +105,22 @@ public class Edit extends HttpServlet {
 			  ps.setTimestamp(9,timestamp);
 
 			  ps.setString(10, employee_id);
+
+			  //変更メッセージ
+			  session.setAttribute("Edit", Common.EditMsg);
+
 			}
 			ps.executeUpdate();
+
+			ps.close();
+			db.close();
 
 		}catch(NamingException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(ps != null) {ps.close();}
-				if(db != null) {db.close();}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
 		}
+
 		//Listサーブレットにリダイレクト
 		response.sendRedirect("List");
 	}

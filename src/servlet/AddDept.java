@@ -62,6 +62,7 @@ public class AddDept extends HttpServlet {
 				//入力された値をデータベースに登録
 				ps = db.prepareStatement("INSERT INTO tb_department(department) VALUES('" + dep + "')");
 				ps.executeUpdate();
+
 			}
 			rs.close();
 			ps.close();

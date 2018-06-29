@@ -45,7 +45,6 @@ public class Add extends HttpServlet {
 		String entry_date = request.getParameter("entry_date");
 		String password = request.getParameter("password");
 		Integer admin_level = Integer.parseInt(request.getParameter("admin_level"));
-		System.out.println(admin_level);
 		//ログインユーザを変数に代入
 		HttpSession session = request.getSession(false);
 		String regist_user = (String) session.getAttribute("id");
@@ -66,8 +65,10 @@ public class Add extends HttpServlet {
 
 				if(employee_id == "") { request.setAttribute("NulId", Common.NulId); }
 				else if(!Common.IdMatch(employee_id)) { request.setAttribute("IdmissMatch", Common.IdMiss); }
+
 				if(employee_name == "") { request.setAttribute("NulName", Common.NulName); }
 				else if(!Common.NameMatch(employee_name)) { request.setAttribute("NamemissMatch", Common.NameMiss); }
+
 				if(department == "") { request.setAttribute("NulDep", Common.NulDep); }
 				if(password == "") { request.setAttribute("NulPass", Common.NulPass); }
 				if(rs.next()) { request.setAttribute("err", Common.IdErr); }
@@ -121,6 +122,10 @@ public class Add extends HttpServlet {
 				ps.setString(8, regist_user);
 				ps.setInt(9, Common.Active);
 				ps.executeUpdate();
+
+				//登録メッセージ
+				session.setAttribute("Add", Common.AddMsg);
+
 			}
 
 			ps.close();
@@ -134,6 +139,7 @@ public class Add extends HttpServlet {
 			getServletContext().getRequestDispatcher("/RegProfile.jsp").forward(request,response);*/
 			e.printStackTrace();
 		}
+
 
 		//Listサーブレットにリダイレクト
 		response.sendRedirect("List");

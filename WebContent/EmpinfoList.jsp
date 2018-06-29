@@ -38,10 +38,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link href="https://fonts.googleapis.com/earlyaccess/nikukyu.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/alert.js"></script>
 	<title>社員一覧</title>
 </head>
 
 <body>
+
+
 	<form method="post" action="Logout">
 		<h1><a href="Menu.jsp">社員情報管理システム</a></h1>
 		<div id="yuza">
@@ -52,6 +55,26 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	</form>
 
 <%
+//処理完了メッセージ
+String edit = (String)session.getAttribute("Edit");
+if(edit == null){edit = ""; }
+String del = (String)session.getAttribute("Del");
+if(del == null){del = ""; }
+String add = (String)session.getAttribute("Add");
+if(add == null){add = ""; }
+%>
+<div style="text-align:center;color:red;">
+	<%= edit %>
+	<%= del %>
+	<%= add %>
+</div>
+<%
+session.removeAttribute("Edit");
+session.removeAttribute("Del");
+session.removeAttribute("Add");
+%>
+
+<%
 //tb_departmentテーブルに接続
 request.setCharacterEncoding("UTF-8");
 Context context = new InitialContext();
@@ -60,6 +83,7 @@ Connection db = ds.getConnection();
 PreparedStatement ps = db.prepareStatement("SELECT department FROM tb_department");
 ResultSet rs = ps.executeQuery();
 %>
+
 	<form method="post" action="Query" class="kensaku">
 		<label id="ken">社員情報検索</label><br>
 		<div class="border1">
@@ -112,7 +136,6 @@ ResultSet rs = ps.executeQuery();
 							<td><%= info.getPost() %></td>
 						<% } %>
 
-
 						<% if(info.getEntry_date() == null){ %>
 							<td><%= str %></td>
 						<% } else { %>
@@ -126,5 +149,6 @@ ResultSet rs = ps.executeQuery();
 				<% } %>
 			</table>
 		</div>
+
 </body>
 </html>
