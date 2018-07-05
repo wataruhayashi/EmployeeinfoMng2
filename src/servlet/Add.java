@@ -28,7 +28,7 @@ public class Add extends HttpServlet {
     public Add() {
         super();
     }
-	@SuppressWarnings("resource")//psをResultSetに代入してからまた使用している為
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 

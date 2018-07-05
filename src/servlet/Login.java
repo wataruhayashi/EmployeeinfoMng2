@@ -77,7 +77,7 @@ public class Login extends HttpServlet {
 				session.setAttribute("name",rs.getString("employee_name"));
 				session.setAttribute("id", rs.getString("employee_id"));
 
-				response.sendRedirect("Menu.jsp");
+				response.sendRedirect("List");
 			} else {
 				//入力エラー表示
 				request.setAttribute("err", Common.IdPassErr);

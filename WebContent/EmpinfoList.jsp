@@ -23,9 +23,6 @@ if(id == null || !Common.IdMatch(id)){ id = ""; }
 //入力された社員名を変数に代入
 String name = (String)request.getParameter("employee_name");
 if(name == null || !Common.NameMatch(name)){ name = ""; }
-//エラー表示
-String nulErr = (String)request.getAttribute("nulErr");
-if(nulErr == null){nulErr ="";}
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 %>
@@ -36,87 +33,166 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
-	<link href="https://fonts.googleapis.com/earlyaccess/nikukyu.css" rel="stylesheet" />
-	<script type="text/javascript" src="js/alert.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link href="https://fonts.googleapis.com/earlyaccess/nikukyu.css" rel="stylesheet" /> -->
+	<!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://icono-49d6.kxcdn.com/icono.min.css">
+	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<title>社員一覧</title>
 </head>
 
 <body>
 
+<!-------------------------------------- ヘッダー------------------------------------->
 
-	<form method="post" action="Logout">
-		<h1><a href="Menu.jsp">社員情報管理システム</a></h1>
-		<div id="yuza">
-			ログインユーザ名：<span class="yu"><%=yuza%></span>
-				<input type="submit" value="ログアウト" class="square_btn2">
+	<header class="bg-info mb-2 text-light fixed-top">
+		<nav class="navbar navbar-light">
+			<ul class="nav">
+				<li class="navbar-brand">
+					<h5><a href="List" class="nav-link active text-light">社員情報管理システム</a></h5>
+				</li>
+				<li class="navbar-brand">
+					<a href="List" class="nav-link text-light">社員一覧</a>
+				</li>
+				<li class="navbar-brand">
+					<a href="RegDept.jsp" class="nav-link text-light">部署登録</a>
+				</li>
+			</ul>
+			<ul class="nav">
+				<form method="post" action="Logout">
+						<i class="icono-user mr-2"></i><%= yuza %>
+						<i class="icono-signOut ml-4"></i><input type="submit" value="ログアウト" class="btn btn-info">
+				</form>
+			</ul>
+		</nav>
+	</header>
+
+
+<!--------------------------------------メイン------------------------------------->
+
+	<main class="w-75 mr-auto ml-auto sukima">
+
+		<div class="mt-5 mb-5">
+			<h4 class="bdr">社員情報一覧</h4>
 		</div>
-		<h2 class="wf-nikukyu">社員一覧</h2>
-	</form>
 
-<%
-//処理完了メッセージ
-String edit = (String)session.getAttribute("Edit");
-if(edit == null){edit = ""; }
-String del = (String)session.getAttribute("Del");
-if(del == null){del = ""; }
-String add = (String)session.getAttribute("Add");
-if(add == null){add = ""; }
-%>
-<div style="text-align:center;color:red;">
-	<%= edit %>
-	<%= del %>
-	<%= add %>
-</div>
-<%
-session.removeAttribute("Edit");
-session.removeAttribute("Del");
-session.removeAttribute("Add");
-%>
+		<!-------------------------処理完了メッセージ---------------------->
+		<%
+		String edit = (String)session.getAttribute("Edit");
+		String del = (String)session.getAttribute("Del");
+		String add = (String)session.getAttribute("Add");
+		%>
 
-<%
-//tb_departmentテーブルに接続
-request.setCharacterEncoding("UTF-8");
-Context context = new InitialContext();
-DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/kensyu");
-Connection db = ds.getConnection();
-PreparedStatement ps = db.prepareStatement("SELECT department FROM tb_department");
-ResultSet rs = ps.executeQuery();
-%>
-
-	<form method="post" action="Query" class="kensaku">
-		<label id="ken">社員情報検索</label><br>
-		<div class="border1">
-			<span id="name">社員番号</span><input type="text" size="40" name="employee_id" value="<%= id %>"id="input_text">
-			<span id="name">社員名</span><input type="text" size="40" name="employee_name" value="<%= name %>"id="input_text"><br>
-			<span id="name">所属</span>
-			<select name="department" id="input_text" style="width:800px;">
-				<% while(rs.next()) { //全データを表示 %>
-					<option value="<%= rs.getString("department") %>">
-					<%= rs.getString("department") %>
-					</option>
-				<% }
-					rs.close();
-					ps.close();
-					db.close();
-				%>
-			</select><br/>
-
-			<input type="submit" value="検索" class="square_btn">
-		</div>
-	</form>
-
-	<div class="border2">
-		<form method="post" action="RegProfile.jsp">
-			<div class="touroku">
-			<% if(hyoji != Common.AUTH_GENE){ //アクセス権限表示 %>
-				<input type="submit" value="新規登録" class="square_btn2">
-			<% } %>
+		<% if(edit != null) { %>
+			<div class="alert alert-success  alert-dismissible fade show text-center" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	   				<span aria-hidden="true">&times;</span>
+	  			</button><%= edit %>
+  			</div>
+		<% } %>
+		<% if(del != null) { %>
+			<div class="alert alert-success text-center" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		   			<span aria-hidden="true">&times;</span>
+		  		</button><%= del %>
 			</div>
-		</form>
+		<% } %>
+		<% if(add != null) { %>
+			<div class="alert alert-success text-center" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	   				<span aria-hidden="true">&times;</span>
+	  			</button><%= add %>
+			</div>
+		<% } %>
 
-			<table class="tbe">
-				<tr>
+		<%
+		session.removeAttribute("Edit");
+		session.removeAttribute("Del");
+		session.removeAttribute("Add");
+		%>
+
+
+		<!-------------------------検索--------------------->
+		<%
+		//tb_departmentテーブルに接続
+		request.setCharacterEncoding("UTF-8");
+		Context context = new InitialContext();
+		DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/kensyu");
+		Connection db = ds.getConnection();
+		PreparedStatement ps = db.prepareStatement("SELECT department FROM tb_department");
+		ResultSet rs = ps.executeQuery();
+		%>
+
+		<div class="form-control bg-light">
+			<form method="post" action="Query" name="ken">
+
+				<div class="form-group row pt-2">
+
+					<label class="col-2 col-form-label text-center">社員番号</label>
+					<div class="col-4">
+						<input type="text" name="employee_id" value="<%= id %>" class="form-control">
+					</div>
+
+					<label class="col-2 col-form-label text-center">社員名</label>
+					<div class="col-4">
+						<input type="text" name="employee_name" value="<%= name %>" class="form-control">
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+
+					<label class="col-2 col-form-label text-center">所属</label>
+					<div class="col-4">
+						<select name="department" class="form-control">
+							<% while(rs.next()) { //全データを表示 %>
+								<option value="<%= rs.getString("department") %>">
+								<%= rs.getString("department") %>
+								</option>
+							<% }
+								rs.close();
+								ps.close();
+								db.close();
+							%>
+						</select><br/>
+					</div>
+
+					<div class="col-2"></div>
+
+					<div class="col-2">
+						<input type="submit" value="検索" class="col-auto form-control bg-dark text-light">
+					</div>
+					<div class="col-2">
+						<label class="col-auto form-control bg-secondary text-center text-light" onClick="clr()">クリア</label>
+						<!-- <input type="reset" value="クリア" class="col-auto form-control bg-secondary text-light"> -->
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+
+		<!---------------------新規登録ボタン----------------->
+
+		<div class="mt-2 mb-5 mr-3">
+			<form method="post" action="RegProfile.jsp">
+				<% if(hyoji != Common.AUTH_GENE){ //アクセス権限表示 %>
+					<input type="submit" value="新規登録" class="btn btn-primary float-right pr-4 pl-4">
+				<% } %>
+			</form>
+		</div>
+
+
+		<!-------------------------テーブル---------------------->
+
+		<div>
+			<table class="table table-striped  table-hover text-center m-auto">
+
+				<tr class="bg-secondary">
 					<th>社員番号</th><th>社員名</th><th>所属</th><th>役職</th><th>入社日</th>
 					<% if(hyoji != Common.AUTH_GENE){ //アクセス権限表示 %>
 						<th></th>
@@ -143,12 +219,43 @@ ResultSet rs = ps.executeQuery();
 						<% } %>
 
 						<% if(hyoji != Common.AUTH_GENE){//アクセス権限表示 %>
-							<td><a href="EditProfile.jsp?employee_id=<%= info.getEmployee_id() %>"><button class="square_btn2">変更</button></a></td>
+							<td><a href="EditProfile.jsp?employee_id=<%= info.getEmployee_id() %>"><button class="btn btn-dark btn-block">変更</button></a></td>
 						<% } %>
 				</tr>
 				<% } %>
 			</table>
 		</div>
+	</main>
+<!-----------スクリプト------------>
+<script>
+function clr() {
+	document.ken.employee_id.value="";
+	document.ken.employee_name.value="";
+	document.ken.department.value="";
+}
+</script>
+
+<!------------スタイル--------------->
+<style>
+.bdr {
+	border-left: 15px solid #17a2b8;
+	border-bottom:1px solid #17a2b8;
+}
+
+.kotei {
+	position:fixed;
+	z-index:9999;
+	top: 0;
+	left:0;
+	right:0;
+
+}
+.sukima {
+	padding-top:10px;
+  	margin-top:50px;
+}
+
+</style>
 
 </body>
 </html>

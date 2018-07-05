@@ -74,6 +74,6 @@ public class AddDept extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect("RegDept.jsp");
+		response.sendRedirect("List");
 	}
 }
