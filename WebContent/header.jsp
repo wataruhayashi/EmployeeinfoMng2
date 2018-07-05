@@ -32,7 +32,6 @@ String yuza = (String)session.getAttribute("name");
 <title>Insert title here</title>
 </head>
 <body>
-<!-------------------------------------- ヘッダー------------------------------------->
 
 	<header class="bg-info mb-2 text-light fixed-top">
 		<nav class="navbar navbar-light">

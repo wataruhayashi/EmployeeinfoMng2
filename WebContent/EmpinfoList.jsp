@@ -44,31 +44,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 <body>
 
-<%-- <!-------------------------------------- ヘッダー------------------------------------->
-
-	<header class="bg-info mb-2 text-light fixed-top">
-		<nav class="navbar navbar-light">
-			<ul class="nav">
-				<li class="navbar-brand">
-					<h5><a href="List" class="nav-link active text-light">社員情報管理システム</a></h5>
-				</li>
-				<li class="navbar-brand">
-					<a href="List" class="nav-link text-light">社員一覧</a>
-				</li>
-				<li class="navbar-brand">
-					<a href="RegDept.jsp" class="nav-link text-light">部署登録</a>
-				</li>
-			</ul>
-			<ul class="nav">
-				<form method="post" action="Logout">
-						<i class="icono-user mr-2"></i><%= yuza %>
-						<i class="icono-signOut ml-4"></i><input type="submit" value="ログアウト" class="btn btn-info">
-				</form>
-			</ul>
-		</nav>
-	</header>
-
- --%>
 <!--------------------------------------メイン------------------------------------->
 
 	<main class="w-75 mr-auto ml-auto sukima">
@@ -124,7 +99,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		ResultSet rs = ps.executeQuery();
 		%>
 
-		<div class="form-control bg-light">
+		<div class="form-control bg-light"style="height:120px;">
 			<form method="post" action="Query" name="ken">
 
 				<div class="form-group row pt-2">
