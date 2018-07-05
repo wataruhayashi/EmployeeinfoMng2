@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+.bdr {
+	border-left: 15px solid #17a2b8;
+	border-bottom:1px solid #17a2b8;
+}
+
+.kotei {
+	position:fixed;
+	z-index:9999;
+	top: 0;
+	left:0;
+	right:0;
+
+}
+.sukima {
+	padding-top:10px;
+  	margin-top:50px;
+}
+

@@ -13,8 +13,6 @@ if(session.getAttribute("id") == null) {
 	getServletContext().getRequestDispatcher("/Login.jsp").forward(request,response);
 
 }
-//ユーザ名
-String yuza = (String)session.getAttribute("name");
 //アクセス権限表示
 Integer hyoji =(Integer)session.getAttribute("hyoji");
 //入力された社員番号を変数に代入
@@ -28,17 +26,16 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 %>
 
 <jsp:useBean id="list" class="java.util.ArrayList" scope="request" />
-
+<jsp:include page="header.jsp" flush="true" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<!-- <link rel="stylesheet" type="text/css" href="css/main.css" />
-	<link href="https://fonts.googleapis.com/earlyaccess/nikukyu.css" rel="stylesheet" /> -->
 	<!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://icono-49d6.kxcdn.com/icono.min.css">
-	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="js/clr.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -47,7 +44,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 <body>
 
-<!-------------------------------------- ヘッダー------------------------------------->
+<%-- <!-------------------------------------- ヘッダー------------------------------------->
 
 	<header class="bg-info mb-2 text-light fixed-top">
 		<nav class="navbar navbar-light">
@@ -71,7 +68,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		</nav>
 	</header>
 
-
+ --%>
 <!--------------------------------------メイン------------------------------------->
 
 	<main class="w-75 mr-auto ml-auto sukima">
@@ -226,36 +223,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			</table>
 		</div>
 	</main>
-<!-----------スクリプト------------>
-<script>
-function clr() {
-	document.ken.employee_id.value="";
-	document.ken.employee_name.value="";
-	document.ken.department.value="";
-}
-</script>
 
-<!------------スタイル--------------->
-<style>
-.bdr {
-	border-left: 15px solid #17a2b8;
-	border-bottom:1px solid #17a2b8;
-}
-
-.kotei {
-	position:fixed;
-	z-index:9999;
-	top: 0;
-	left:0;
-	right:0;
-
-}
-.sukima {
-	padding-top:10px;
-  	margin-top:50px;
-}
-
-</style>
 
 </body>
 </html>
