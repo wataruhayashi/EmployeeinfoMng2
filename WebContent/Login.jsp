@@ -19,7 +19,7 @@
 
 	<header class="bg-info p-3 mb-5">
 		<div>
-				<h5 class=" text-white text-sm-left">社員情報管理システム</h5>
+				<h5 class=" text-white text-sm-left text-weight">社員情報管理システム</h5>
 		</div>
 	</header>
 
